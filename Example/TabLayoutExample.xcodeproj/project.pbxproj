@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C78A62326B9A415000EF5AD /* CFDTabLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 3C78A62226B9A415000EF5AD /* CFDTabLayout */; };
 		3CECDAA226B537B80058C4C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECDAA126B537B80058C4C9 /* AppDelegate.swift */; };
 		3CECDAA426B537B80058C4C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECDAA326B537B80058C4C9 /* SceneDelegate.swift */; };
 		3CECDAA626B537B80058C4C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECDAA526B537B80058C4C9 /* ViewController.swift */; };
 		3CECDAA926B537B80058C4C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CECDAA726B537B80058C4C9 /* Main.storyboard */; };
 		3CECDAAB26B537B90058C4C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CECDAAA26B537B90058C4C9 /* Assets.xcassets */; };
 		3CECDAAE26B537B90058C4C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CECDAAC26B537B90058C4C9 /* LaunchScreen.storyboard */; };
+		3CF725AF26B9BE030013665F /* CFDTabLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 3CF725AE26B9BE030013665F /* CFDTabLayout */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,6 +38,7 @@
 		3CECDAAA26B537B90058C4C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3CECDAAD26B537B90058C4C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3CECDAAF26B537B90058C4C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3CF725AD26B9BDCF0013665F /* CFDTabLayout */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CFDTabLayout; path = ../../CFDTabLayout; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C78A62326B9A415000EF5AD /* CFDTabLayout in Frameworks */,
+				3CF725AF26B9BE030013665F /* CFDTabLayout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +80,7 @@
 				3CECDAAA26B537B90058C4C9 /* Assets.xcassets */,
 				3CECDAAC26B537B90058C4C9 /* LaunchScreen.storyboard */,
 				3CECDAAF26B537B90058C4C9 /* Info.plist */,
+				3CF725AD26B9BDCF0013665F /* CFDTabLayout */,
 			);
 			path = TabLayoutExample;
 			sourceTree = "<group>";
@@ -108,7 +110,7 @@
 			);
 			name = TabLayoutExample;
 			packageProductDependencies = (
-				3C78A62226B9A415000EF5AD /* CFDTabLayout */,
+				3CF725AE26B9BE030013665F /* CFDTabLayout */,
 			);
 			productName = TabLayoutExample;
 			productReference = 3CECDA9E26B537B80058C4C9 /* TabLayoutExample.app */;
@@ -138,7 +140,6 @@
 			);
 			mainGroup = 3CECDA9526B537B80058C4C9;
 			packageReferences = (
-				3C78A62126B9A415000EF5AD /* XCRemoteSwiftPackageReference "CFDTabLayout" */,
 			);
 			productRefGroup = 3CECDA9F26B537B80058C4C9 /* Products */;
 			projectDirPath = "";
@@ -372,21 +373,9 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		3C78A62126B9A415000EF5AD /* XCRemoteSwiftPackageReference "CFDTabLayout" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/newNadik/CFDTabLayout";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		3C78A62226B9A415000EF5AD /* CFDTabLayout */ = {
+		3CF725AE26B9BE030013665F /* CFDTabLayout */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3C78A62126B9A415000EF5AD /* XCRemoteSwiftPackageReference "CFDTabLayout" */;
 			productName = CFDTabLayout;
 		};
 /* End XCSwiftPackageProductDependency section */

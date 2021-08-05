@@ -78,7 +78,6 @@ import UIKit
             pageController.dataSource = self
             pageController.delegate = self
             pageController.scrollView?.delegate = self
-//            pageController.setViewControllers([viewControllerAt(index: currentPage)], direction: UIPageViewController.NavigationDirection.forward, animated: true, completion: nil)
                         
             parentController.addChild(pageController)
             pageController.view.frame = containerView.bounds
@@ -99,117 +98,7 @@ import UIKit
     func titleForTabAt(index: Int) -> String {
         return delegate?.tabLayout(self, titleAt: index) ?? ""
     }
-    
-}
-
-extension CFDTabLayout: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    
-    public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        let currentIndex = viewController.view.tag
-        let newIndex = currentIndex - 1
-        if(newIndex >= 0) {
-            return viewControllerAt(index: newIndex)
-        }
-        return nil
-    }
-    
-    public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        let currentIndex = viewController.view.tag
-        let newIndex = currentIndex + 1
-        if(newIndex < (delegate?.numberOfPages(in: self) ?? 0)) {
-            return viewControllerAt(index: newIndex)
-        }
-        return nil
-    }
-    
-    public func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        pendingIndex = pendingViewControllers.first?.view.tag ?? 0
-    }
-    
-    public func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        if completed {
-            currentPage = pendingIndex
-            self.selectPage(currentPage)
-        }
-    }
-    
-}
-
-extension CFDTabLayout: UICollectionViewDataSource, UICollectionViewDelegate {
-    
-    public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (delegate?.numberOfPages(in: self) ?? 0)
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CFDTabCollectionViewCell", for: indexPath) as! CFDTabCollectionViewCell
-        cell.tabsCollectionHeight.constant = collectionView.bounds.height
-        cell.indicatorHeight.constant = indicatorHeight
-        cell.setColors(selectedColor: selectedColor, unselectedColor: unselectedColor)
-        cell.setTitle(titleForTabAt(index: indexPath.item))
-        return cell
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        moveToPage(index: indexPath.item)
-    }
-    
-}
-
-enum NavigationDirection {
-    case stopped
-    case right
-    case left
-}
-
-extension CFDTabLayout: UIScrollViewDelegate {
-    
-    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        startOffset = scrollView.contentOffset.x
-    }
-    
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        var direction = NavigationDirection.stopped //scroll stopped
         
-        let fromIndex = currentPage
-        var toIndex = -1
-        if startOffset < scrollView.contentOffset.x {
-            direction = NavigationDirection.right
-            if((fromIndex + 1) < (delegate?.numberOfPages(in: self) ?? 0)) {
-                toIndex = fromIndex + 1
-            }
-        } else if startOffset > scrollView.contentOffset.x {
-            direction = NavigationDirection.left
-            if(fromIndex - 1 >= 0) {
-                toIndex = fromIndex - 1
-            }
-        }
-        let positionFromStartOfCurrentPage = abs(startOffset - scrollView.contentOffset.x)
-        let percentage = (positionFromStartOfCurrentPage / pageController.view.frame.width)
-
-        if(!stopAnimation && toIndex != -1) {
-            selectPage(toIndex, fromIndex: fromIndex, progress: percentage, direction: direction)
-        }
-        /* //Total scroll progress
-        let offset = scrollView.contentOffset.x
-        let bounds = scrollView.bounds.width
-        let page = CGFloat(self.currentPage)
-        let count = CGFloat(numberOfPages)
-        let percentage = (offset - bounds + page * bounds) / (count * bounds - bounds)
-        
-        print("PAGE SCROLL \(percentage)") */
-    }
-    
-    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if(self.pageController.scrollView?.isDecelerating == false) {
-            self.selectPage(self.currentPage)
-        }
-    }
-    
     func selectPage(_ toIndex: Int, fromIndex: Int = -1, progress: CGFloat = 1, direction: NavigationDirection = .stopped) {
         for i in 0..<(delegate?.numberOfPages(in: self) ?? 0) {
             if let toCell = tabsCollectionView.cellForItem(at: IndexPath(item: i, section: 0)) as? CFDTabCollectionViewCell {
@@ -237,7 +126,8 @@ extension CFDTabLayout: UIScrollViewDelegate {
             } else if index < currentPage {
                 let vc = viewControllerAt(index: index)
                 self.stopAnimation = (currentPage - index) > 1
-                self.pageController.setViewControllers([vc], direction: UIPageViewController.NavigationDirection.reverse, animated: true, completion: { (complete) -> Void in
+                self.pageController.setViewControllers([vc], direction: UIPageViewController.NavigationDirection.reverse, animated: true, completion:
+                                                        { (complete) -> Void in
                     self.currentPage = index
                     self.selectPage(index)
                     self.stopAnimation = false
