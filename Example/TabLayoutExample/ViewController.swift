@@ -24,12 +24,12 @@ class ViewController: UIViewController {
 extension ViewController: CFDTabLayoutProtocol {
     
     func numberOfPages(in tabLayout: CFDTabLayout) -> Int {
-        return 5
+        return 9
     }
         
     func tabLayout(_ tabLayout: CFDTabLayout, viewControllerAt index: Int) -> UIViewController {
         let vc = UIViewController()
-        switch index {
+        switch (index % 5) {
         case 0:
             vc.view.backgroundColor = .orange
             break

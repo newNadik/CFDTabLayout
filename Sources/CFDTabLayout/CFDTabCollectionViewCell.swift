@@ -31,6 +31,11 @@ class CFDTabCollectionViewCell: UICollectionViewCell {
         ])
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        moveTo(progress: 0, direction: .stopped)
+    }
+    
     func setTitle(_ title: String) {
         titleLabel.text = title
         titleSelectedLabel.text = title

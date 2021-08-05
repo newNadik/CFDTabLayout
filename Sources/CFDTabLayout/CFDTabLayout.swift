@@ -22,7 +22,7 @@ import UIKit
     
     var currentPage = 0
     var pendingIndex = 0
-    var startOffset: CGFloat = 0
+
     var stopAnimation = false
     
     @IBInspectable open var indicatorHeight: CGFloat = 3
@@ -111,13 +111,14 @@ import UIKit
                 }
             }
         }
+        tabsCollectionView.scrollToItem(at: IndexPath(item: toIndex, section: 0), at: .centeredHorizontally, animated: true)
     }
     
     func moveToPage(index: Int) {
         if index < (delegate?.numberOfPages(in: self) ?? 0) {
             if index > currentPage {
                 let vc = viewControllerAt(index: index)
-                self.stopAnimation = (index - currentPage) > 1
+                self.stopAnimation = true // (index - currentPage) > 1
                 self.pageController.setViewControllers([vc], direction: UIPageViewController.NavigationDirection.forward, animated: true, completion: { (complete) -> Void in
                     self.currentPage = index
                     self.selectPage(index)
@@ -125,7 +126,7 @@ import UIKit
                 })
             } else if index < currentPage {
                 let vc = viewControllerAt(index: index)
-                self.stopAnimation = (currentPage - index) > 1
+                self.stopAnimation = true // (currentPage - index) > 1
                 self.pageController.setViewControllers([vc], direction: UIPageViewController.NavigationDirection.reverse, animated: true, completion:
                                                         { (complete) -> Void in
                     self.currentPage = index

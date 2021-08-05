@@ -48,40 +48,33 @@ extension CFDTabLayout: UIPageViewControllerDataSource, UIPageViewControllerDele
 
 extension CFDTabLayout: UIScrollViewDelegate {
     
-    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        startOffset = scrollView.contentOffset.x
-    }
-    
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        var direction = NavigationDirection.stopped //scroll stopped
+        if(scrollView != pageController.scrollView) {
+            return
+        }
+        var direction = NavigationDirection.stopped
         
         let fromIndex = currentPage
         var toIndex = -1
-        if startOffset < scrollView.contentOffset.x {
+        if((scrollView.panGestureRecognizer.translation(in: scrollView.superview)).x < 0) {
             direction = NavigationDirection.right
             if((fromIndex + 1) < (delegate?.numberOfPages(in: self) ?? 0)) {
                 toIndex = fromIndex + 1
             }
-        } else if startOffset > scrollView.contentOffset.x {
+        } else if ((scrollView.panGestureRecognizer.translation(in: scrollView.superview)).x > 0) {
             direction = NavigationDirection.left
             if(fromIndex - 1 >= 0) {
                 toIndex = fromIndex - 1
             }
         }
-        let positionFromStartOfCurrentPage = abs(startOffset - scrollView.contentOffset.x)
-        let percentage = (positionFromStartOfCurrentPage / pageController.view.frame.width)
-
+        
+        let offset = scrollView.contentOffset.x
+        let bounds = scrollView.bounds.width
+        let percentage = (abs(offset - bounds) / bounds)
+        
         if(!stopAnimation && toIndex != -1) {
             selectPage(toIndex, fromIndex: fromIndex, progress: percentage, direction: direction)
         }
-        //Total scroll progress
-//        let offset = scrollView.contentOffset.x
-//        let bounds = scrollView.bounds.width
-//        let page = CGFloat(self.currentPage)
-//        let count = CGFloat(delegate?.numberOfPages(in: self) ?? 0)
-//        let percent = (offset - bounds + page * bounds) / (count * bounds - bounds)
-//
-//        print("PAGE SCROLL \(percent)")
     }
     
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -89,6 +82,5 @@ extension CFDTabLayout: UIScrollViewDelegate {
             self.selectPage(self.currentPage)
         }
     }
-    
     
 }

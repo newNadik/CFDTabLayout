@@ -30,6 +30,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3CC6453326BBF67000168F25 /* CFDTabLayout */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CFDTabLayout; path = ../..; sourceTree = "<group>"; };
 		3CECDA9E26B537B80058C4C9 /* TabLayoutExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabLayoutExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CECDAA126B537B80058C4C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3CECDAA326B537B80058C4C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -38,7 +39,6 @@
 		3CECDAAA26B537B90058C4C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3CECDAAD26B537B90058C4C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3CECDAAF26B537B90058C4C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3CF725AD26B9BDCF0013665F /* CFDTabLayout */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CFDTabLayout; path = ../../CFDTabLayout; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +80,7 @@
 				3CECDAAA26B537B90058C4C9 /* Assets.xcassets */,
 				3CECDAAC26B537B90058C4C9 /* LaunchScreen.storyboard */,
 				3CECDAAF26B537B90058C4C9 /* Info.plist */,
-				3CF725AD26B9BDCF0013665F /* CFDTabLayout */,
+				3CC6453326BBF67000168F25 /* CFDTabLayout */,
 			);
 			path = TabLayoutExample;
 			sourceTree = "<group>";
