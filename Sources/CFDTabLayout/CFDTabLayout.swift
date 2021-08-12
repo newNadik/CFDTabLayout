@@ -28,6 +28,7 @@ import UIKit
     @IBInspectable open var indicatorHeight: CGFloat = 3
     @IBInspectable open var selectedColor: UIColor = .systemBlue
     @IBInspectable open var unselectedColor: UIColor = .secondaryLabel
+    open var tabFont: UIFont = .systemFont(ofSize: 15)
     
     weak open var delegate: CFDTabLayoutProtocol? {
         didSet {

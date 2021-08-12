@@ -36,6 +36,11 @@ class CFDTabCollectionViewCell: UICollectionViewCell {
         moveTo(progress: 0, direction: .stopped)
     }
     
+    func setFont(_ font: UIFont) {
+        titleLabel.font = font
+        titleSelectedLabel.font = font
+    }
+    
     func setTitle(_ title: String) {
         titleLabel.text = title
         titleSelectedLabel.text = title
