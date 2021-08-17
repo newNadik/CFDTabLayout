@@ -20,6 +20,7 @@ extension CFDTabLayout: UICollectionViewDataSource, UICollectionViewDelegate {
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CFDTabCollectionViewCell", for: indexPath) as! CFDTabCollectionViewCell
+        cell.fullWidth = self.fullWidth
         cell.setFont(self.tabFont)
         cell.tabsCollectionHeight.constant = collectionView.bounds.height
         cell.indicatorHeight.constant = indicatorHeight

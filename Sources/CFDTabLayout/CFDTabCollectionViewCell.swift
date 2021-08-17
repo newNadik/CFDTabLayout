@@ -19,16 +19,19 @@ class CFDTabCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var indicatorRightAnchor: NSLayoutConstraint!
     @IBOutlet weak var indicatorWidth: NSLayoutConstraint!
     
+    var fullWidth: Bool = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            contentView.leftAnchor.constraint(equalTo: leftAnchor),
-            contentView.rightAnchor.constraint(equalTo: rightAnchor),
-            contentView.topAnchor.constraint(equalTo: topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
+//        if(!fullWidth) {
+            contentView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                contentView.leftAnchor.constraint(equalTo: leftAnchor),
+                contentView.rightAnchor.constraint(equalTo: rightAnchor),
+                contentView.topAnchor.constraint(equalTo: topAnchor),
+                contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            ])
+//        }
     }
 
     override func prepareForReuse() {

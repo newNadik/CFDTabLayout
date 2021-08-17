@@ -11,11 +11,7 @@ import UIKit
 @objc public class CFDTabLayout: UIView {
     
     @IBOutlet weak var tabsCollectionView: UICollectionView!
-    @IBOutlet weak var collectionLayout: UICollectionViewFlowLayout! {
-        didSet {
-            collectionLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        }
-    }
+    @IBOutlet weak var collectionLayout: UICollectionViewFlowLayout!
 
     @IBOutlet weak var containerView: UIView!
     var pageController = CFDPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
@@ -28,6 +24,8 @@ import UIKit
     @IBInspectable open var indicatorHeight: CGFloat = 3
     @IBInspectable open var selectedColor: UIColor = .systemBlue
     @IBInspectable open var unselectedColor: UIColor = .secondaryLabel
+    @IBInspectable open var fullWidth: Bool = false
+    
     open var tabFont: UIFont = .systemFont(ofSize: 15)
     
     weak open var delegate: CFDTabLayoutProtocol? {
@@ -43,6 +41,11 @@ import UIKit
                                           animated: true, completion: { _ in
                                             self.selectPage(self.currentPage)
                                           })
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        setEstimatedItemSize()
     }
     
     //MARK: - init
@@ -141,4 +144,18 @@ import UIKit
         }
     }
     
+    func setEstimatedItemSize() {
+        self.tabsCollectionView.layoutIfNeeded()
+        DispatchQueue.main.async {
+            if(self.fullWidth) {
+                let width = self.tabsCollectionView.bounds.width / CGFloat(self.delegate?.numberOfPages(in: self) ?? 1)
+                self.collectionLayout.itemSize = CGSize(width: max(0, width), height: self.tabsCollectionView.bounds.height)
+            } else {
+                self.collectionLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+            }
+            self.collectionLayout.prepare()
+            self.collectionLayout.invalidateLayout()
+            self.tabsCollectionView?.reloadData()
+        }
+    }
 }
