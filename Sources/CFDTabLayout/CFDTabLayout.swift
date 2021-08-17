@@ -13,7 +13,7 @@ import UIKit
     @IBOutlet weak var tabsCollectionView: UICollectionView!
     @IBOutlet weak var collectionLayout: UICollectionViewFlowLayout!
 
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var containerView: UIView?
     var pageController = CFDPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     
     var currentPage = 0
@@ -81,7 +81,8 @@ import UIKit
     
     func setup() {
         tabsCollectionView.register(UINib(nibName: "CFDTabCollectionViewCell", bundle: Bundle.module), forCellWithReuseIdentifier: "CFDTabCollectionViewCell")
-        if let parentController = parentViewController {
+        if let parentController = parentViewController,
+            let containerView = containerView {
             pageController.dataSource = self
             pageController.delegate = self
             pageController.scrollView?.delegate = self
@@ -97,7 +98,7 @@ import UIKit
     }
     
     func viewControllerAt(index: Int) -> UIViewController {
-        let vc = delegate?.tabLayout(self, viewControllerAt: index) ?? UIViewController()
+        let vc = delegate?.tabLayout?(self, viewControllerAt: index) ?? UIViewController()
         vc.view.tag = index
         return vc
     }
@@ -122,24 +123,34 @@ import UIKit
     }
     
     func moveToPage(index: Int) {
+        let finish = {
+            self.currentPage = index
+            self.selectPage(index)
+            self.stopAnimation = false
+        }
         if index < (delegate?.numberOfPages(in: self) ?? 0) {
             if index > currentPage {
                 let vc = viewControllerAt(index: index)
                 self.stopAnimation = true // (index - currentPage) > 1
-                self.pageController.setViewControllers([vc], direction: UIPageViewController.NavigationDirection.forward, animated: true, completion: { (complete) -> Void in
-                    self.currentPage = index
-                    self.selectPage(index)
-                    self.stopAnimation = false
-                })
+                if(containerView == nil) {
+                    finish()
+                } else {
+                    self.pageController.setViewControllers([vc], direction: UIPageViewController.NavigationDirection.forward,
+                                                           animated: true, completion: { (complete) -> Void in
+                                                            finish()
+                                                           })
+                }
             } else if index < currentPage {
                 let vc = viewControllerAt(index: index)
                 self.stopAnimation = true // (currentPage - index) > 1
-                self.pageController.setViewControllers([vc], direction: UIPageViewController.NavigationDirection.reverse, animated: true, completion:
-                                                        { (complete) -> Void in
-                    self.currentPage = index
-                    self.selectPage(index)
-                    self.stopAnimation = false
-                })
+                if(containerView == nil) {
+                    finish()
+                } else {
+                    self.pageController.setViewControllers([vc], direction: UIPageViewController.NavigationDirection.reverse,
+                                                           animated: true, completion: { (complete) -> Void in
+                                                            finish()
+                                                           })
+                }
             }
         }
     }

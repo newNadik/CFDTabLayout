@@ -8,10 +8,10 @@
 import UIKit
 import Foundation
 
-public protocol CFDTabLayoutProtocol: NSObjectProtocol {
+@objc public protocol CFDTabLayoutProtocol: NSObjectProtocol {
  
     func numberOfPages(in tabLayout: CFDTabLayout) -> Int
-    func tabLayout(_ tabLayout: CFDTabLayout, viewControllerAt index: Int) -> UIViewController
+    @objc optional func tabLayout(_ tabLayout: CFDTabLayout, viewControllerAt index: Int) -> UIViewController
     func tabLayout(_ tabLayout: CFDTabLayout, titleAt index: Int) -> String
     
 }
