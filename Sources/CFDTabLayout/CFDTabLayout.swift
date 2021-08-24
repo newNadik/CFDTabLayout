@@ -37,7 +37,7 @@ import UIKit
     open func reloadData() {
         currentPage = 0
         tabsCollectionView.reloadData()
-        pageController.setViewControllers([viewControllerAt(index: currentPage)], direction: UIPageViewController.NavigationDirection.forward,
+        pageController.setViewControllers([viewControllerAt(index: currentPage) ?? UIViewController()], direction: UIPageViewController.NavigationDirection.forward,
                                           animated: true, completion: { _ in
                                             self.selectPage(self.currentPage)
                                           })
@@ -97,9 +97,9 @@ import UIKit
         }
     }
     
-    func viewControllerAt(index: Int) -> UIViewController {
-        let vc = delegate?.tabLayout?(self, viewControllerAt: index) ?? UIViewController()
-        vc.view.tag = index
+    func viewControllerAt(index: Int) -> UIViewController? {
+        let vc = delegate?.tabLayout?(self, viewControllerAt: index)
+        vc?.view.tag = index
         return vc
     }
     
@@ -130,7 +130,7 @@ import UIKit
         }
         if index < (delegate?.numberOfPages(in: self) ?? 0) {
             if index > currentPage {
-                let vc = viewControllerAt(index: index)
+                let vc = viewControllerAt(index: index) ?? UIViewController()
                 self.stopAnimation = true // (index - currentPage) > 1
                 if(containerView == nil) {
                     finish()
@@ -141,7 +141,7 @@ import UIKit
                                                            })
                 }
             } else if index < currentPage {
-                let vc = viewControllerAt(index: index)
+                let vc = viewControllerAt(index: index) ?? UIViewController()
                 self.stopAnimation = true // (currentPage - index) > 1
                 if(containerView == nil) {
                     finish()

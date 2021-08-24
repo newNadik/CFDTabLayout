@@ -11,7 +11,7 @@ import Foundation
 @objc public protocol CFDTabLayoutProtocol: NSObjectProtocol {
  
     func numberOfPages(in tabLayout: CFDTabLayout) -> Int
-    @objc optional func tabLayout(_ tabLayout: CFDTabLayout, viewControllerAt index: Int) -> UIViewController
+    @objc optional func tabLayout(_ tabLayout: CFDTabLayout, viewControllerAt index: Int) -> UIViewController?
     func tabLayout(_ tabLayout: CFDTabLayout, titleAt index: Int) -> String
     
 }
