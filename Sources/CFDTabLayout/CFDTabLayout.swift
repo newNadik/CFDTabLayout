@@ -131,7 +131,7 @@ import UIKit
         if index < (delegate?.numberOfPages(in: self) ?? 0) {
             if index > currentPage {
                 let vc = viewControllerAt(index: index) ?? UIViewController()
-                self.stopAnimation = true // (index - currentPage) > 1
+                self.stopAnimation = abs(index - currentPage) > 1
                 if(containerView == nil) {
                     finish()
                 } else {
@@ -142,7 +142,7 @@ import UIKit
                 }
             } else if index < currentPage {
                 let vc = viewControllerAt(index: index) ?? UIViewController()
-                self.stopAnimation = true // (currentPage - index) > 1
+                self.stopAnimation = abs(currentPage - index) > 1
                 if(containerView == nil) {
                     finish()
                 } else {

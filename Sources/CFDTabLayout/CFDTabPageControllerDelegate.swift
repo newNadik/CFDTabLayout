@@ -56,22 +56,20 @@ extension CFDTabLayout: UIScrollViewDelegate {
         
         let fromIndex = currentPage
         var toIndex = -1
-        if((scrollView.panGestureRecognizer.translation(in: scrollView.superview)).x < 0) {
-            direction = NavigationDirection.right
-            if((fromIndex + 1) < (delegate?.numberOfPages(in: self) ?? 0)) {
-                toIndex = fromIndex + 1
-            }
-        } else if ((scrollView.panGestureRecognizer.translation(in: scrollView.superview)).x > 0) {
-            direction = NavigationDirection.left
-            if(fromIndex - 1 >= 0) {
-                toIndex = fromIndex - 1
+        if(self.pendingIndex >= 0) {
+            toIndex = pendingIndex
+            if(toIndex < fromIndex) {
+                direction = NavigationDirection.left
+            } else if(toIndex > fromIndex) {
+                direction = NavigationDirection.right
             }
         }
-        
-        let offset = scrollView.contentOffset.x
-        let bounds = scrollView.bounds.width
-        let percentage = (abs(offset - bounds) / bounds)
-        
+        var percentage: CGFloat = 1
+        if(toIndex != fromIndex) {
+            let offset = scrollView.contentOffset.x
+            let bounds = scrollView.bounds.width
+            percentage = (abs(offset - bounds) / bounds)
+        }
         if(!stopAnimation && toIndex != -1) {
             selectPage(toIndex, fromIndex: fromIndex, progress: percentage, direction: direction)
         }
