@@ -38,10 +38,14 @@ import UIKit
         if(currentPage >= delegate?.numberOfPages(in: self) ?? 0) {
             currentPage = 0
         }
-        tabsCollectionView.reloadData()
+        tabsCollectionView.performBatchUpdates {
+            tabsCollectionView.reloadData()
+        } completion: { finished in
+            self.selectPage(self.currentPage)
+        }
         pageController.setViewControllers([viewControllerAt(index: currentPage) ?? UIViewController()], direction: UIPageViewController.NavigationDirection.forward,
                                           animated: animated, completion: { _ in
-                                            self.selectPage(self.currentPage)
+//                                            self.selectPage(self.currentPage)
                                           })
     }
     
