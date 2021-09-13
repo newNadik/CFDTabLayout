@@ -34,11 +34,11 @@ import UIKit
         }
     }
     
-    open func reloadData() {
+    open func reloadData(_ animated: Bool = true) {
         currentPage = 0
         tabsCollectionView.reloadData()
         pageController.setViewControllers([viewControllerAt(index: currentPage) ?? UIViewController()], direction: UIPageViewController.NavigationDirection.forward,
-                                          animated: true, completion: { _ in
+                                          animated: animated, completion: { _ in
                                             self.selectPage(self.currentPage)
                                           })
     }
