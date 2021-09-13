@@ -34,8 +34,10 @@ import UIKit
         }
     }
     
-    open func reloadData(_ animated: Bool = true) {
-        currentPage = 0
+    open func reloadData(_ animated: Bool = false) {
+        if(currentPage >= delegate?.numberOfPages(in: self) ?? 0) {
+            currentPage = 0
+        }
         tabsCollectionView.reloadData()
         pageController.setViewControllers([viewControllerAt(index: currentPage) ?? UIViewController()], direction: UIPageViewController.NavigationDirection.forward,
                                           animated: animated, completion: { _ in
