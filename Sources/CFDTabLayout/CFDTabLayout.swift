@@ -125,7 +125,9 @@ import UIKit
                 }
             }
         }
-        tabsCollectionView.scrollToItem(at: IndexPath(item: toIndex, section: 0), at: .centeredHorizontally, animated: true)
+        if(toIndex > tabsCollectionView.numberOfItems(inSection: 0)) {
+            tabsCollectionView.scrollToItem(at: IndexPath(item: toIndex, section: 0), at: .centeredHorizontally, animated: true)
+        }
     }
     
     func moveToPage(index: Int) {
