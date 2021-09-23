@@ -26,6 +26,9 @@ extension CFDTabLayout: UICollectionViewDataSource, UICollectionViewDelegate {
         cell.indicatorHeight.constant = indicatorHeight
         cell.setColors(selectedColor: selectedColor, unselectedColor: unselectedColor)
         cell.setTitle(titleForTabAt(index: indexPath.item))
+        if(indexPath.item == self.currentPage) {
+            cell.moveTo(progress: 1, direction: .stopped)
+        }
         return cell
     }
     
