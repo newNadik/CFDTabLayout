@@ -31,7 +31,7 @@ extension CFDTabLayout: UICollectionViewDataSource, UICollectionViewDelegate {
     
     public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if(indexPath.item == self.currentPage) {
-            (cell as? CFDTabCollectionViewCell)?.moveTo(progress: 1, direction: .stopped)
+            (cell as? CFDTabCollectionViewCell)?.moveTo(progress: 1, direction: .right)
         }
     }
     

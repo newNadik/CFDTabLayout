@@ -39,7 +39,7 @@ import UIKit
             currentPage = 0
         }
         tabsCollectionView.performBatchUpdates {
-            tabsCollectionView.reloadData()
+            tabsCollectionView.reloadSections(IndexSet(integer: 0))
         } completion: { finished in
             self.selectPage(self.currentPage)
         }
