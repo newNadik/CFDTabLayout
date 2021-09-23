@@ -125,7 +125,7 @@ import UIKit
                 }
             }
         }
-        if(toIndex > tabsCollectionView.numberOfItems(inSection: 0)) {
+        if(toIndex < tabsCollectionView.numberOfItems(inSection: 0)) {
             tabsCollectionView.scrollToItem(at: IndexPath(item: toIndex, section: 0), at: .centeredHorizontally, animated: true)
         }
     }
