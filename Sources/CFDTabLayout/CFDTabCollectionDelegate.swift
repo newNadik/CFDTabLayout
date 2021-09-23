@@ -26,10 +26,13 @@ extension CFDTabLayout: UICollectionViewDataSource, UICollectionViewDelegate {
         cell.indicatorHeight.constant = indicatorHeight
         cell.setColors(selectedColor: selectedColor, unselectedColor: unselectedColor)
         cell.setTitle(titleForTabAt(index: indexPath.item))
-        if(indexPath.item == self.currentPage) {
-            cell.moveTo(progress: 1, direction: .stopped)
-        }
         return cell
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if(indexPath.item == self.currentPage) {
+            (cell as? CFDTabCollectionViewCell)?.moveTo(progress: 1, direction: .stopped)
+        }
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
