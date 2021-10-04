@@ -22,4 +22,11 @@ class CFDPageViewController: UIPageViewController {
         return viewControllers?.first?.view.tag ?? 0
     }
     
+    func setSwipe(enabled: Bool) {
+        for view in self.view.subviews {
+            if let subView = view as? UIScrollView {
+                subView.isScrollEnabled = enabled
+            }
+        }
+    }
 }

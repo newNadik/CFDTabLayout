@@ -49,6 +49,10 @@ import UIKit
                                           })
     }
     
+    open func setSwipe(enabled: Bool) {
+        pageController.setSwipe(enabled: enabled)
+    }
+    
     public override func layoutSubviews() {
         super.layoutSubviews()
         setEstimatedItemSize()
