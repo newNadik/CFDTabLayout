@@ -13,5 +13,6 @@ import Foundation
     func numberOfPages(in tabLayout: CFDTabLayout) -> Int
     @objc optional func tabLayout(_ tabLayout: CFDTabLayout, viewControllerAt index: Int) -> UIViewController?
     func tabLayout(_ tabLayout: CFDTabLayout, titleAt index: Int) -> String
+    @objc optional func tabLayout(_ tabLayout: CFDTabLayout, didSelectTab index: Int)
     
 }

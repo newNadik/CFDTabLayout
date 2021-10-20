@@ -38,6 +38,7 @@ extension CFDTabLayout: UICollectionViewDataSource, UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.pendingIndex = indexPath.item
         moveToPage(index: indexPath.item)
+        delegate?.tabLayout?(self, didSelectTab: indexPath.item)
     }
     
 }
