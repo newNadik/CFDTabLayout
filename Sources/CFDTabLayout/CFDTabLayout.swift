@@ -16,7 +16,7 @@ import UIKit
     @IBOutlet weak var containerView: UIView?
     var pageController = CFDPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     
-    var currentPage = 0
+    open var currentPage = 0
     var pendingIndex = 0
 
     var stopAnimation = false
