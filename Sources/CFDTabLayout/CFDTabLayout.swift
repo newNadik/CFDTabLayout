@@ -43,12 +43,8 @@ import UIKit
         } completion: { finished in
             self.selectPage(self.currentPage)
         }
-        DispatchQueue.main.async {
-            self.pageController.setViewControllers([self.viewControllerAt(index: self.currentPage) ?? UIViewController()],
-                                                   direction: UIPageViewController.NavigationDirection.forward,
-                                                   animated: animated, completion: { _ in
-            })
-        }
+        self.setViewController(self.viewControllerAt(index: self.currentPage), direction: UIPageViewController.NavigationDirection.forward,
+                               animated: animated, completion: nil)
     }
     
     open func setSwipe(enabled: Bool) {
@@ -149,12 +145,8 @@ import UIKit
                 if(containerView == nil) {
                     finish()
                 } else {
-                    DispatchQueue.main.async {
-                        self.pageController.setViewControllers([vc], direction: UIPageViewController.NavigationDirection.forward,
-                                                               animated: true,
-                                                               completion: { (complete) -> Void in
-                            finish()
-                        })
+                    self.setViewController(vc, direction: UIPageViewController.NavigationDirection.forward, animated: true) { _ in
+                        finish()
                     }
                 }
             } else if index < currentPage {
@@ -163,14 +155,25 @@ import UIKit
                 if(containerView == nil) {
                     finish()
                 } else {
-                    DispatchQueue.main.async {
-                        self.pageController.setViewControllers([vc], direction: UIPageViewController.NavigationDirection.reverse,
-                                                               animated: true,
-                                                               completion: { (complete) -> Void in
-                            finish()
-                        })
+                    self.setViewController(vc, direction: UIPageViewController.NavigationDirection.reverse, animated: true) { _ in
+                        finish()
                     }
                 }
+            }
+        }
+    }
+    
+    func setViewController(_ targetVC: UIViewController?,
+                           direction: UIPageViewController.NavigationDirection, animated: Bool, completion: ((Bool) -> Void)? = nil) {
+        if (self.pageController.viewControllers?.first != targetVC) {
+            DispatchQueue.main.async {
+                UIView.setAnimationsEnabled(false)
+                self.pageController.setViewControllers([targetVC ?? UIViewController()], direction: direction,
+                                                       animated: animated,
+                                                       completion: { (complete) -> Void in
+                    completion?(complete)
+                    UIView.setAnimationsEnabled(true)
+                })
             }
         }
     }

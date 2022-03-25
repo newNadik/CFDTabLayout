@@ -40,5 +40,4 @@ extension CFDTabLayout: UICollectionViewDataSource, UICollectionViewDelegate {
         moveToPage(index: indexPath.item)
         delegate?.tabLayout?(self, didSelectTab: indexPath.item)
     }
-    
 }
