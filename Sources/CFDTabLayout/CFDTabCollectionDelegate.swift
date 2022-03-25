@@ -8,7 +8,7 @@
 import UIKit
 import Foundation
 
-extension CFDTabLayout: UICollectionViewDataSource, UICollectionViewDelegate {
+extension CFDTabLayout: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -39,5 +39,16 @@ extension CFDTabLayout: UICollectionViewDataSource, UICollectionViewDelegate {
         self.pendingIndex = indexPath.item
         moveToPage(index: indexPath.item)
         delegate?.tabLayout?(self, didSelectTab: indexPath.item)
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if(self.fullWidth) {
+            let width = collectionView.bounds.width / CGFloat(max(self.delegate?.numberOfPages(in: self) ?? 0, 1))
+            return CGSize(width: max(0, width), height: self.tabsCollectionView.bounds.height)
+        }
+        let title = titleForTabAt(index: indexPath.item)
+        let titleSize = (title as NSString).size(withAttributes: [NSAttributedString.Key.font: self.tabFont])
+        let width: CGFloat = 30 + titleSize.width
+        return CGSize(width: width, height: collectionView.bounds.height)
     }
 }

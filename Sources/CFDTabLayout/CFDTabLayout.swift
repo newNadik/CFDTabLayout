@@ -179,17 +179,17 @@ import UIKit
     }
     
     func setEstimatedItemSize() {
-        self.tabsCollectionView.layoutIfNeeded()
+//        self.tabsCollectionView.layoutIfNeeded()
         DispatchQueue.main.async {
-            if(self.fullWidth) {
-                let width = self.tabsCollectionView.bounds.width / CGFloat(self.delegate?.numberOfPages(in: self) ?? 1)
-                self.collectionLayout.itemSize = CGSize(width: max(0, width), height: self.tabsCollectionView.bounds.height)
-            } else {
-                self.collectionLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-            }
-            self.collectionLayout.prepare()
+//            if(self.fullWidth) {
+//                let width = self.tabsCollectionView.bounds.width / CGFloat(self.delegate?.numberOfPages(in: self) ?? 1)
+//                self.collectionLayout.itemSize = CGSize(width: max(0, width), height: self.tabsCollectionView.bounds.height)
+//            } else {
+//                self.collectionLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+//            }
+//            self.collectionLayout.prepare()
             self.collectionLayout.invalidateLayout()
-            self.tabsCollectionView?.reloadData()
+//            self.tabsCollectionView?.reloadData()
         }
     }
 }
