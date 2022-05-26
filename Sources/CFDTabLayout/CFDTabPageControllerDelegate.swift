@@ -76,6 +76,9 @@ extension CFDTabLayout: UIScrollViewDelegate {
     }
     
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView == self.tabsCollectionView {
+            return
+        }
         if(!stopAnimation && self.pageController.scrollView?.isDecelerating == false) {
             self.selectPage(self.currentPage)
         }

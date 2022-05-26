@@ -22,7 +22,7 @@ import UIKit
     var stopAnimation = false
     
     @IBInspectable open var indicatorHeight: CGFloat = 3
-    @IBInspectable open var selectedColor: UIColor = .systemBlue
+    @IBInspectable open var selectedColor: UIColor = .secondaryLabel
     @IBInspectable open var unselectedColor: UIColor = .secondaryLabel
     @IBInspectable open var fullWidth: Bool = false
     
